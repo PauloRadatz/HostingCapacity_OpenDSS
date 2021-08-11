@@ -8,38 +8,12 @@
 
 class HostingCapacity:
 
-
     def __init__(self, dss, bus, load_mult):
-        """
-
-        Parameters
-        ----------
-        dss
-        bus
-        load_mult
-        circuit_pu
-        kva_to_kw
-        pf
-        """
         self.dss = dss
         self.bus = bus
         self.load_mult = load_mult
 
-
-
     def ov_criteria_hc_calc(self, gen_kv, ov_threshold_pu, p_step, max_p=10000):
-        """
-
-        Parameters
-        ----------
-        ov_threshold_pu
-        p_step
-        max_p
-
-        Returns
-        -------
-
-        """
         self.__new_gen(gen_kv, p_step)
 
         i = 0
@@ -60,10 +34,18 @@ class HostingCapacity:
             return max_p
 
     def __new_gen(self, gen_kv, kw):
-        self.dss.text(f"new generator.gen phases=3 kv={gen_kv} bus1={self.bus} kw={kw} kva={kw} pf=1")
+        self.dss.text(f"new generator.gen "
+                      f"phases=3 "
+                      f"kv={gen_kv} "
+                      f"bus1={self.bus} "
+                      f"kw={kw} "
+                      f"kva={kw} "
+                      f"pf=1")
 
     def __increment_generator_size(self, kw):
-        self.dss.text(f"edit generator.gen kw={kw} kva={kw}")
+        self.dss.text(f"edit generator.gen "
+                      f"kw={kw} "
+                      f"kva={kw}")
 
     def __get_max_feeder_voltage(self):
         voltages = self.dss.circuit_allbusvmagpu()
