@@ -48,7 +48,7 @@ class HostingCapacity:
                       f"kva={kw}")
 
     def __get_max_feeder_voltage(self):
-        voltages = self.dss.circuit_allbusvmagpu()
+        voltages = self.dss.circuit_all_bus_vmag_pu()
         return max(voltages)
 
 

@@ -20,3 +20,5 @@ print(df["Hosting_Capacity_kW"].describe())
 df.plot.hist(bins=15)
 plt.grid()
 plt.show()
+
+

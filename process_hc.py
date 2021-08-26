@@ -24,15 +24,15 @@ def get_3ph_mv_buses():
     mv_buses = list()
     mv_bus_voltage_dict = dict()
 
-    buses = dss.circuit_allbusnames()
+    buses = dss.circuit_all_bus_names()
 
     for bus in buses:
-        dss.circuit_setactivebus(bus)
+        dss.circuit_set_active_bus(bus)
         if bus == "sourcebus":
             pass
-        elif dss.bus_kVbase() >= 1.0 and len(dss.bus_nodes()) == 3:
+        elif dss.bus_kv_base() >= 1.0 and len(dss.bus_nodes()) == 3:
             mv_buses.append(bus)
-            mv_bus_voltage_dict[bus] = dss.bus_kVbase() * math.sqrt(3)
+            mv_bus_voltage_dict[bus] = dss.bus_kv_base() * math.sqrt(3)
 
     return mv_buses, mv_bus_voltage_dict
 
@@ -64,3 +64,5 @@ df = pd.DataFrame().from_dict(dict_to_df)
 
 output_file = pathlib.Path(script_path).joinpath("outputs", "results.csv")
 df.to_csv(output_file, index=False)
+
+
