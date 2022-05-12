@@ -48,15 +48,14 @@ mv_buses, mv_bus_voltage_dict = get_3ph_mv_buses()
 
 bus_name_list = []
 hc_list = []
-# for bus in mv_buses:
 
-bus = 'bus_1105'
-dss.text(f"Compile [{dss_file}]")
-set_baseline()
-bus_name_list.append(bus)
-hc_obj = HostingCapacity(dss, bus, 0.3)
-p_max = hc_obj.ov_criteria_hc_calc(mv_bus_voltage_dict[bus], 1.05, 250)
-hc_list.append(p_max)
+for bus in mv_buses:
+    dss.text(f"Compile [{dss_file}]")
+    set_baseline()
+    bus_name_list.append(bus)
+    hc_obj = HostingCapacity(dss, bus, 0.3)
+    p_max = hc_obj.ov_criteria_hc_calc(mv_bus_voltage_dict[bus], 1.05, 250)
+    hc_list.append(p_max)
 
 # Save results in a csv file
 dict_to_df = dict()

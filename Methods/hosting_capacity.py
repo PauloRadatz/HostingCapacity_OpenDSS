@@ -21,12 +21,12 @@ class HostingCapacity:
 
         self.dss.text(f"set loadmult={self.load_mult}")
         self.dss.text("solve")
-        self.dss.text("Plot profile phases=all")
+        # self.dss.text("Plot profile phases=all")
         while not ov_violation and i * p_step <= max_p:
             i += 1
             self.__increment_generator_size(p_step * i)
             self.dss.text("solve")
-            self.dss.text("Plot profile phases=all")
+            # self.dss.text("Plot profile phases=all")
             max_v = self.__get_max_feeder_voltage()
 
             if max_v > ov_threshold_pu:
