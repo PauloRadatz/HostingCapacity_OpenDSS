@@ -39,7 +39,6 @@ def get_3ph_mv_buses():
 
 script_path = os.path.dirname(os.path.abspath(__file__))
 dss_file = pathlib.Path(script_path).joinpath("Feeders", "ckt5", "Master_ckt5.dss")
-dss_file = pathlib.Path(script_path).joinpath("Feeders", "105bus", "Master.dss")
 
 dss = py_dss_interface.DSSDLL()
 
@@ -48,12 +47,11 @@ mv_buses, mv_bus_voltage_dict = get_3ph_mv_buses()
 
 bus_name_list = []
 hc_list = []
-
 for bus in mv_buses:
     dss.text(f"Compile [{dss_file}]")
     set_baseline()
     bus_name_list.append(bus)
-    hc_obj = HostingCapacity(dss, bus, 0.3)
+    hc_obj = HostingCapacity(dss, bus, 1)
     p_max = hc_obj.ov_criteria_hc_calc(mv_bus_voltage_dict[bus], 1.05, 250)
     hc_list.append(p_max)
 
