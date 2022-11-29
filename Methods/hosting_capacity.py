@@ -18,26 +18,7 @@ class HostingCapacity:
         self.p_step = p_step
 
     def set_feeder(self):
-        # self.dss.text(f"Compile [{self.dss_file}]")
-        # self.dss.text("Set Maxiterations=100")
-        # self.dss.text("Edit Vsource.Source pu=1.03")
-        # self.dss.text("edit Reactor.MDV_SUB_1_HSB x=0.0000001")
-        # self.dss.text("edit Transformer.MDV_SUB_1 %loadloss=0.0000001 xhl=0.00000001")
-        # self.dss.text("Set controlmode=Off")
-
         self.dss.text(f"Compile [{self.dss_file}]")
-        # self.dss.text("Set Maxiterations=100")
-        # self.dss.text("Set Maxcontroli=100")
-        # self.dss.text("Edit Vsource.Source pu=1.04")
-        # self.dss.text("edit Reactor.MDV_SUB_1_HSB x=0.0000001")
-        # self.dss.text("edit Transformer.MDV_SUB_1 %loadloss=0.0000001 xhl=0.00000001")
-        # self.dss.text("Set controlmode=Off")
-        # self.dss.text("batchedit load..* mode=1")
-        # self.dss.text("batchedit load..* vmaxpu=1.25")
-        # self.dss.text("batchedit load..* vminpu=0.75")
-        # self.dss.text("New Energymeter.m1 Line.ln5815900-1 1")
-        # self.dss.text("batchedit capacitor..* enabled=no")
-
 
     def ov_gen_hc_calc(self, gen_kv, ov_threshold_pu):
         self.set_feeder()
@@ -95,7 +76,7 @@ class HostingCapacity:
 
                         if rating_current > 0:
                             if max_phase_current / rating_current > 1:
-                                print(f"OL Gen element = {element}")
+                                # print(f"OL Gen element = {element}")
                                 ol_violation = True
                                 break
 
@@ -160,7 +141,7 @@ class HostingCapacity:
 
                         if rating_current > 0:
                             if max_phase_current / rating_current > 1:
-                                print(f"OL Load element = {element}")
+                                # print(f"OL Load element = {element}")
                                 ol_violation = True
                                 break
 

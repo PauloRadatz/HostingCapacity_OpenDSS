@@ -11,22 +11,6 @@ import math
 import pandas as pd
 from Methods import HostingCapacity
 
-# def get_3ph_mv_buses():
-#     mv_buses = list()
-#     mv_bus_voltage_dict = dict()
-#
-#     buses = dss.circuit_all_bus_names()
-#
-#     for bus in buses:
-#         dss.circuit_set_active_bus(bus)
-#         if bus == "sourcebus":
-#             pass
-#         elif dss.bus_kv_base() >= 1.0 and len(dss.bus_nodes()) == 3:
-#             mv_buses.append(bus)
-#             mv_bus_voltage_dict[bus] = dss.bus_kv_base() * math.sqrt(3)
-#
-#     return mv_buses, mv_bus_voltage_dict
-
 
 script_path = os.path.dirname(os.path.abspath(__file__))
 dss_file = pathlib.Path(script_path).joinpath("Feeders", "SimpleCircuit", "SimpleCircuit.dss")
@@ -34,7 +18,6 @@ dss_file = pathlib.Path(script_path).joinpath("Feeders", "SimpleCircuit", "Simpl
 dss = py_dss_interface.DSSDLL()
 
 dss.text(f"Compile [{dss_file}]")
-# mv_buses, mv_bus_voltage_dict = get_3ph_mv_buses()
 
 bus_name_list = []
 ov_gen_hc_list = []

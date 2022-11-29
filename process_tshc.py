@@ -17,7 +17,6 @@ dss_file = pathlib.Path(script_path).joinpath("Feeders", "SimpleCircuit", "Simpl
 dss = py_dss_interface.DSSDLL()
 
 dss.text(f"Compile [{dss_file}]")
-# mv_buses, mv_bus_voltage_dict = get_3ph_mv_buses()
 
 bus_name_list = []
 ov_gen_hc_list = []
