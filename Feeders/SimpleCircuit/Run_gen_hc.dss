@@ -1,0 +1,22 @@
+clearall
+
+compile simplecircuit.dss
+
+set loadmult=0.3
+
+new generator.gen bus1=C kv=12.47 pf=1 kw=4500 vmaxpu=1.2 vminpu=0.8
+
+solve
+Show Voltage LN Nodes
+Show Currents Elements
+
+
+! Overvoltage limit of 1.05 -> 3700 kW at bus C
+! Thermal for gen -> 11000 kW at bus C
+
+! Hosting Capacity for bus C = 3700 kW
+
+! Losses base case = 0.04MW
+! Losses min (1500 kW) = 0.0078MW
+! Losses (approximation) equal to base case (P + 2*1500 = sqrt(3) * 12.47 * 67.875 + 3000 = 1466 + 3000 = 4500kW) = 0.04MW
+! Losses Max (Conductor limit) (P + 1500 = sqrt(3) * 12.47 * 400 + 1500 = 10139 == 11000kW) = 0.1MW

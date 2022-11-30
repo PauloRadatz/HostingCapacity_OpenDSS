@@ -19,8 +19,8 @@ hc_df = pd.read_csv(output_hc_file, index_col=0)
 min_gen_hc = hc_df[["OV Gen HC (kW)", "OL Gen HC (kW)"]].min(axis=1).values[0]
 min_load_hc = hc_df[["UV Load HC (kW)", "OL Load HC (kW)"]].min(axis=1).values[0]
 
-print(f"Minimum gen HC = {min_gen_hc} kW")
-print(f"Minimum load HC = {min_load_hc} kW")
+print(f"Max gen HC at C = {min_gen_hc} kW")
+print(f"Max load HC at C = {min_load_hc} kW")
 
 tshc_df = pd.read_csv(output_tshc_file)
 tshc_df["gen kW"] = tshc_df[["OV Gen HC (kW)", "OL Gen HC (kW)"]].min(axis=1)

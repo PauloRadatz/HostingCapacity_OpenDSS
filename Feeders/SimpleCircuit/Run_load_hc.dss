@@ -1,0 +1,17 @@
+clearall
+
+compile simplecircuit.dss
+
+set loadmult=1
+
+new load.new_ld bus1=C kv=12.47 pf=1 kw=2700 status=fixed vmaxpu=1.2 vminpu=0.8
+
+solve
+Show Voltage LN Nodes
+Show Currents Elements
+
+
+! Undervoltage limit of 1.05 -> 2700 kW at bus C
+! Thermal for load -> 3300 kW at bus C
+
+! Hosting Capacity for bus C = 2700 kW

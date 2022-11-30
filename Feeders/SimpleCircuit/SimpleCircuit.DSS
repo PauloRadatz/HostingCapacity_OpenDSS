@@ -5,8 +5,8 @@ new circuit.SimpleCircuit basekV=12.47 phases=3 model=ideal bus1=A pu=1.04
 new line.lnAB bus1=A bus2=B length=10 units=km normamps=800
 new line.lnBC bus1=B bus2=C length=10 units=km normamps=400
 
-new load.ldB bus1=B kv=12.47 kw=5000 pf=1 
-new load.ldC bus1=C kv=12.47 kw=5000 pf=1 
+new load.ldB bus1=B kv=12.47 kw=5000 pf=1 vmaxpu=1.2 vminpu=0.8
+new load.ldC bus1=C kv=12.47 kw=5000 pf=1 vmaxpu=1.2 vminpu=0.8 
    
 set voltagebases=[12.47] 
 calcvoltagebases

@@ -20,16 +20,23 @@ dss = py_dss_interface.DSSDLL()
 dss.text(f"Compile [{dss_file}]")
 
 bus_name_list = []
+
 ov_gen_hc_list = []
-uv_load_hc_list = []
 ol_gen_hc_list = []
+
+uv_load_hc_list = []
 ol_load_hc_list = []
+
 mv_buses = ["C"]
+
+offpeak_load = 0.3
+peak_load = 1
+
 for bus in mv_buses:
     dss.circuit_set_active_bus(bus)
     bus_kv = dss.bus_kv_base() * math.sqrt(3)
     bus_name_list.append(bus)
-    hc_obj = HostingCapacity(dss_file, dss, bus, 0.3, 1, 20000, 250)
+    hc_obj = HostingCapacity(dss_file, dss, bus, offpeak_load, peak_load, 20000, 100)
     ov_gen_hc_list.append(hc_obj.ov_gen_hc_calc(bus_kv, 1.05))
     uv_load_hc_list.append(hc_obj.uv_load_hc_calc(bus_kv, 0.95))
     ol_gen_hc_list.append(hc_obj.ol_gen_hc_calc(bus_kv))

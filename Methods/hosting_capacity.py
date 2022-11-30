@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# @Time    : 8/6/2021 3:00 PM
 # @Author  : Paulo Radatz
 # @Email   : pradatz@epri.com
 # @File    : Methods.py
@@ -8,12 +7,12 @@
 
 class HostingCapacity:
 
-    def __init__(self, dss_file, dss, bus, offpeak_load_mult, peak_load_mult, max_p, p_step):
+    def __init__(self, dss_file, dss, bus, load_mult_new_gen, load_mult_new_load, max_p, p_step):
         self.dss_file = dss_file
         self.dss = dss
         self.bus = bus
-        self.offpeak_load_mult = offpeak_load_mult
-        self.peak_load_mult = peak_load_mult
+        self.load_mult_new_gen = load_mult_new_gen
+        self.load_mult_new_load = load_mult_new_load
         self.max_p = max_p
         self.p_step = p_step
 
@@ -27,7 +26,7 @@ class HostingCapacity:
         i = 0
         ov_violation = False
 
-        self.dss.text(f"set loadmult={self.offpeak_load_mult}")
+        self.dss.text(f"set loadmult={self.load_mult_new_gen}")
         self.dss.text("solve")
         # self.dss.text("Plot profile phases=all")
         while not ov_violation and i * self.p_step <= self.max_p:
@@ -52,7 +51,7 @@ class HostingCapacity:
         i = 0
         ol_violation = False
 
-        self.dss.text(f"set loadmult={self.offpeak_load_mult}")
+        self.dss.text(f"set loadmult={self.load_mult_new_gen}")
         self.dss.text("solve")
         # self.dss.text("Plot profile phases=all")
         while not ol_violation and i * self.p_step <= self.max_p:
@@ -92,7 +91,7 @@ class HostingCapacity:
         i = 0
         uv_violation = False
 
-        self.dss.text(f"set loadmult={self.peak_load_mult}")
+        self.dss.text(f"set loadmult={self.load_mult_new_load}")
         self.dss.text("solve")
         # self.dss.text("Plot profile phases=all")
         while not uv_violation and i * self.p_step <= self.max_p:
@@ -117,7 +116,7 @@ class HostingCapacity:
         i = 0
         ol_violation = False
 
-        self.dss.text(f"set loadmult={self.peak_load_mult}")
+        self.dss.text(f"set loadmult={self.load_mult_new_load}")
         self.dss.text("solve")
         # self.dss.text("Plot profile phases=all")
         while not ol_violation and i * self.p_step <= self.max_p:
@@ -157,7 +156,9 @@ class HostingCapacity:
                       f"bus1={self.bus} "
                       f"kw={kw} "
                       f"kva={kw} "
-                      f"pf=1")
+                      f"pf=1 "
+                      f"vmaxpu=1.2 "
+                      f"vminpu=0.8")
 
     def __new_load(self, load_kv, kw):
         self.dss.text(f"new load.load "
@@ -166,7 +167,9 @@ class HostingCapacity:
                       f"bus1={self.bus} "
                       f"kw={kw} "
                       f"pf=1 "
-                      f"status=Fixed")
+                      f"status=Fixed "
+                      f"vmaxpu=1.2 "
+                      f"vminpu=0.8")
 
     def __increment_generator_size(self, kw):
         self.dss.text(f"edit generator.gen "
